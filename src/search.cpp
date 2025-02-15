@@ -836,6 +836,8 @@ Value Search::Worker::search(
         // Null move dynamic reduction based on depth and eval
         Depth R = std::min(int(eval - beta) / 237, 6) + depth / 3 + 5;
 
+        R += cutNode;
+
         ss->currentMove                   = Move::null();
         ss->continuationHistory           = &thisThread->continuationHistory[0][0][NO_PIECE][0];
         ss->continuationCorrectionHistory = &thisThread->continuationCorrectionHistory[NO_PIECE][0];
