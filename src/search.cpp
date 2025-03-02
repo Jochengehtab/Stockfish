@@ -1212,7 +1212,7 @@ moves_loop:  // When in check, search starts here
             r -= 1937;
             
         // When improving increase reduction
-        else if (improving && !PvNode)
+        if (improving && !PvNode)
             r += 500;    
 
         if (capture)
