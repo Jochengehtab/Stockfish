@@ -1186,15 +1186,8 @@ moves_loop:  // When in check, search starts here
             r += 3094 + 1056 * !ttData.move;
 
         // Increase reduction if ttMove is a capture
-        if (ttCapture) {
-            if (ttData.move.type_of() != NORMAL){
-                r += 1415;
-            }
-            else {
-                Piece capturedPiece = pos.piece_on(ttData.move.to_sq());
-                r += 1415 - (PieceValue[capturedPiece] / 2);
-            }
-        }
+        if (ttCapture)
+            r += 1415 - (moveCount * 10);
 
         // Increase reduction if next ply has a lot of fail high
         if ((ss + 1)->cutoffCnt > 2)
