@@ -1187,15 +1187,13 @@ moves_loop:  // When in check, search starts here
 
         // Increase reduction if ttMove is a capture
         if (ttCapture) {
-            Piece capturedPiece;
-
-            if (ttData.move.type_of() == EN_PASSANT){
-                capturedPiece = make_piece(~us, PAWN);
+            if (ttData.move.type_of() != NORMAL){
+                r += 1415;
             }
             else {
-                capturedPiece = pos.piece_on(ttData.move.to_sq());
+                Piece capturedPiece = pos.piece_on(ttData.move.to_sq());
+                r += 1415 - (PieceValue[capturedPiece] / 2);
             }
-            r += 1415 - (PieceValue[capturedPiece] / 2);
         }
 
         // Increase reduction if next ply has a lot of fail high
