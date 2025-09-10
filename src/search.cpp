@@ -1192,7 +1192,7 @@ moves_loop:  // When in check, search starts here
 
         // Increase reduction if ttMove is a capture
         if (ttCapture)
-            r += 1415 - (moveCount * 40);
+            r += 1415 - (moveCount * ss->averragMoveCount);
 
         // Increase reduction if next ply has a lot of fail high
         if ((ss + 1)->cutoffCnt > 2)
@@ -1388,6 +1388,8 @@ moves_loop:  // When in check, search starts here
     // return a fail low score.
 
     assert(moveCount || !ss->inCheck || excludedMove || !MoveList<LEGAL>(pos).size());
+
+    ss->averragMoveCount = (ss->averragMoveCount + moveCount) / 2;
 
     // Adjust best value for fail high cases
     if (bestValue >= beta && !is_decisive(bestValue) && !is_decisive(alpha))
