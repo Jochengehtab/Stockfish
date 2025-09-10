@@ -1389,7 +1389,7 @@ moves_loop:  // When in check, search starts here
 
     assert(moveCount || !ss->inCheck || excludedMove || !MoveList<LEGAL>(pos).size());
 
-    ss->averragMoveCount = (ss->averragMoveCount + moveCount) / 2;
+    ss->averragMoveCount = (ss->averragMoveCount + ss->moveCount) / 2;
 
     // Adjust best value for fail high cases
     if (bestValue >= beta && !is_decisive(bestValue) && !is_decisive(alpha))
